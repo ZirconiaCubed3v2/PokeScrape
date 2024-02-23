@@ -58,7 +58,7 @@ entries = BeautifulSoup(''.join(str(child) for child in soup.find("div", class_=
 for entry in entries:
   tempSoup = BeautifulSoup(str(entry), "html.parser")
   val = tempSoup.findAll("td", class_="cell-num")[0].text
-  match ((tempSoup.findAll("th")[0].text).lower()):
+  match ((tempSoup.findAll("th")[0].text).lower()):    # before this project, i was completely unaware that python had switch-case structures now
     case "hp":
       finalData["base_stats"]["hp"] = val
     case "attack":
