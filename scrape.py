@@ -1,5 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+from pokerrors import *
+
+POKEMON = "zacion"
 
 # In the final 'entry' of data (a dict), we need the following information:
 #     name (str)
@@ -26,8 +29,10 @@ finalData = {"name": '',
              "evos": {}}
 
 # grab the url of the page
-URL = "https://pokemondb.net/pokedex/flabebe"
+URL = "https://pokemondb.net/pokedex/%s" % str(POKEMON)
 page = requests.get(URL)
+if (page.status_code == 404):
+  raise PokemonNotFoundError(POKEMON)
 
 # set up the parser
 soup = BeautifulSoup(page.content, "html.parser")
